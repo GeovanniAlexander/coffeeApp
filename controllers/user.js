@@ -54,7 +54,6 @@ const userDelete = async(req, res) =>{
     res.send({user});
 }
 
-
 module.exports = { 
     userGet, 
     userPost, 
