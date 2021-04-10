@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 
-
 const productSchema = new Schema({
     name: {
         type: String,
@@ -33,6 +32,9 @@ const productSchema = new Schema({
     disponibility: {
         type: Boolean,
         default: true
+    },
+    img:{ 
+        type: String
     }
 });
 

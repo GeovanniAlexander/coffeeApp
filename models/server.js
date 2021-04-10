@@ -1,9 +1,11 @@
 const express = require('express');
 const cors = require('cors');
+const fileUpload = require('express-fileupload');
 
 const categoriesRoutes = require('../routes/categories');
 const authRoutes = require('../routes/auth');
 const userRoutes = require('../routes/user');
+const uploadRoutes = require('../routes/uploads');
 const productRoutes = require('../routes/products'); 
 const searcRoutes = require('../routes/search');
 
@@ -18,6 +20,7 @@ class Server {
         this.pathRoutes = {
             auth:       '/auth',
             categories: '/categories',
+            uploads:     '/uploads',
             user:       '/user',
             product:    '/products',
             search:     '/search',
@@ -36,11 +39,17 @@ class Server {
         this.app.use(cors());
         this.app.use(express.json());
         this.app.use(express.static('public'));
+        this.app.use(fileUpload({
+            useTempFiles : true,
+            tempFileDir : '/tmp/',
+            createParentPath: true
+        }));
     }
 
     routes(){
         this.app.use(this.pathRoutes.auth, authRoutes);
         this.app.use(this.pathRoutes.categories, categoriesRoutes);
+        this.app.use(this.pathRoutes.uploads, uploadRoutes);
         this.app.use(this.pathRoutes.user, userRoutes);
         this.app.use(this.pathRoutes.product, productRoutes);
         this.app.use(this.pathRoutes.search, searcRoutes);

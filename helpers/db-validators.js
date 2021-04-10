@@ -28,4 +28,13 @@ const existProduct = async(id) => {
   if ( !valProduct ) throw new Error(`El producto con id: ${ id } no existe`);
 }
 
-module.exports = { validateRole, valUniqueEmail, existUserById, existCategory, existProduct };
+const allowsCollections = (collection, collections) => {
+  const valCollecion = collections.includes(collection);
+  if( !valCollecion ){
+    throw new Error(`La coleccion no esta permitida`);
+  }
+  
+  return true;
+}
+
+module.exports = { validateRole, valUniqueEmail, existUserById, existCategory, existProduct, allowsCollections};
